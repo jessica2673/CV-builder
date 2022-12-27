@@ -34,8 +34,10 @@ class App extends Component {
         <General/>
         <h2>Education</h2>
         <School/>
+        <button>Add</button>
         <h2>Work Experience</h2>
         <Work />
+        <button>Add</button>
       </div>
     )
   }

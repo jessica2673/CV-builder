@@ -48,19 +48,19 @@ class General extends React.Component {
                 <div>
                     <form onSubmit={this.handleSubmit}>
                         <label htmlFor="editable">First Name: </label>
-                        <input type="text" id="firstName" value={this.state.firstName} onChange={this.handleChange} />
+                        <input type="text" id="firstName" value={firstName} onChange={this.handleChange} />
 
                         <label htmlFor="editable">Last Name: </label>
-                        <input type="text" id="lastName" value={this.state.lastName} onChange={this.handleChange} />
+                        <input type="text" id="lastName" value={lastName} onChange={this.handleChange} />
 
                         <label htmlFor="editable">Email: </label>
-                        <input type="text" id="email" value={this.state.email} onChange={this.handleChange} />
+                        <input type="text" id="email" value={email} onChange={this.handleChange} />
 
                         <label htmlFor="editable">Phone </label>
-                        <input type="text" id="phone" value={this.state.phone} onChange={this.handleChange} />
+                        <input type="text" id="phone" value={phone} onChange={this.handleChange} />
 
                         <label htmlFor="editable">Website: </label>
-                        <input type="text" id="website" value={this.state.website} onChange={this.handleChange} />
+                        <input type="text" id="website" value={website} onChange={this.handleChange} />
                         <input type="submit" value="Save" />
                     </form>
                 </div>
