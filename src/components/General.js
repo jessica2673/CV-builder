@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-//import GeneralEdit from './GeneralEdit';
 
 class General extends React.Component {
     constructor(props) {
@@ -11,7 +10,7 @@ class General extends React.Component {
             email: 'abc@email.com',
             phone: '1112223333',
             website: 'helloworld.com',
-            editable: 0 //represents view mode
+            editable: 0 //represents view mode and 1 represents edit mode
         }
         this.handleChange = this.handleChange.bind(this);
     }
