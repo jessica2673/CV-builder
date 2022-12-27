@@ -41,8 +41,8 @@ class App extends Component {
     return (
       <div id="main">
         <h2>About</h2>
-        <this.ChooseRender/>
-        <button className="edit" onClick={this.changeToEdit}>{ (this.state.edit === 0) ? "Edit" : "Save" }</button>
+        <General/>
+        {/*<button className="edit" onClick={this.changeToEdit}>{ (this.state.edit === 0) ? "Edit" : "Save" }</button>*/}
         <h2>Education</h2>
         <School/>
         <h2>Work Experience</h2>
