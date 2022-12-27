@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import GeneralEdit from './GeneralEdit';
 
 class General extends React.Component {
     constructor(props) {
@@ -21,7 +22,6 @@ class General extends React.Component {
                 <p>{email}</p>
                 <p>{phone}</p>
                 <p>{website}</p>
-                <button onClick={this.update}>Edit</button>
             </div>
         );
     }

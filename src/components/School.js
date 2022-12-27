@@ -8,11 +8,11 @@ class School extends React.Component {
             name: 'University of School',
             date: '20XX - Present',
             study: 'Computer Science',
-            description: 'Lorem ipsum',
+            description: 'Ad Omnia Paratus',
         }
     }
 
-    render() {
+    render() {       
         const { name, date, study, description } = this.state;
         return (
             <div>
