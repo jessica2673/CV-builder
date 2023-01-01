@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { useEffect } from 'react';
 import General from './components/General';
 import School from './components/School';
 import Work from './components/Work';
@@ -9,10 +10,13 @@ class App extends Component {
     super();
     
     this.state = {
-      schoolList: [<School/>],
-      workList: [<Work />],
+      schoolList: [ <School/> ],
+      workList: [ <Work /> ],
       edit: 0 //where 0 represents not in edit mode.
     }
+
+    this.changeToEdit = this.changeToEdit.bind(this);
+    this.addSchool = this.addSchool.bind(this);
   };
 
   handleChangeGeneral = (e) => {
@@ -30,13 +34,16 @@ class App extends Component {
     })
   }
 
-  addSchool = () => {
+  addSchool = (newSchool) => {
+    let currSchools = [...this.state.schoolList];
+    currSchools.push(newSchool);
     this.setState({
-      schoolList: this.state.schoolList.concat(<School />)
+      schoolList: currSchools
     });
   }
 
   PrintSchool = () => {
+    console.log(this.state.schoolList.name);
     return (
       <div>
         {this.state.schoolList.map((school) => (
@@ -48,15 +55,26 @@ class App extends Component {
 
    addWork = () => {
     this.setState({
-      schoolList: this.state.schoolList.concat(<School />)
+      workList: this.state.workList.concat(<Work />)
     });
   }
 
-  PrintWchool = () => {
+  remove = () => {
+    const t = this.state.workList.indexOf(this.state);
+    this.setState({
+      workList: this.state.workList.splice(t, 1)
+    });
+    console.log(this.state.workList);
+  }
+
+  PrintWork = () => {
     return (
       <div>
         {this.state.workList.map((work) => (
-            <div key={uniqid()}>{work}</div>
+            <div key={uniqid()}>
+              <div>{work}</div>
+              <button id={work.id} onClick={this.remove}>Remove</button>
+            </div>
          ))}
        </div>
      )
@@ -71,7 +89,7 @@ class App extends Component {
         <this.PrintSchool />   
         <button onClick={this.addSchool}>Add</button>
         <h2>Work Experience</h2>
-        <this.PrintSchool />
+        <this.PrintWork />
         <button onClick={this.addWork}>Add</button>
       </div>
     )

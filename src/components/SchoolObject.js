@@ -1,17 +1,20 @@
 import React, { Component } from 'react';
+import uniqid from "uniqid";
 
-class Work extends React.Component {
+class SchoolObject extends React.Component {
     constructor(props) {
         super(props);
 
         this.state = {
-            company: 'Company',
-            position: 'Web Developer',
+            name: 'University of School',
             date: '20XX - Present',
-            description: 'Coded lol',
-            remove: false,
-            editable: 0 //represents view mode and 1 represents edit mode
+            study: 'Computer Science',
+            description: 'Ad Omnia Paratus',
+            editable: 0, //represents view mode and 1 represents edit mode
         }
+
+        this.handleChange = this.handleChange.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
     }
 
     edit = () => {
@@ -27,21 +30,18 @@ class Work extends React.Component {
     handleSubmit = (e) => {
         e.preventDefault();
         this.setState({editable: 0});
+        console.log(this.state);
+        return this.state;
     }
 
-    removeThis = () => {
-        this.setState({remove: true});
-    }
-
-    render() {
-        const { company, position, date, description } = this.state;
-
+    render() {   
+        const { name, date, study, description } = this.state;
         if(this.state.editable === 0) {
             return (
                 <div>
-                    <h3>{company}</h3>
-                    <p>{position}</p>
+                    <h3>{name}</h3>
                     <p>{date}</p>
+                    <p>{study}</p>
                     <p>{description}</p>
                     <button onClick={this.edit}>Edit</button>
                 </div>
@@ -50,14 +50,14 @@ class Work extends React.Component {
             return (
                 <div>
                     <form onSubmit={this.handleSubmit}>
-                        <label htmlFor="editable">Company: </label>
-                        <input type="text" id="company" value={company} onChange={this.handleChange} />
+                        <label htmlFor="editable">School name: </label>
+                        <input type="text" id="name" value={name} onChange={this.handleChange} />
 
-                        <label htmlFor="editable">Position </label>
-                        <input type="text" id="position" value={position} onChange={this.handleChange} />
-
-                        <label htmlFor="editable">Date: </label>
+                        <label htmlFor="editable">Date of Study: </label>
                         <input type="text" id="date" value={date} onChange={this.handleChange} />
+
+                        <label htmlFor="editable">Subject of Study: </label>
+                        <input type="text" id="study" value={study} onChange={this.handleChange} />
 
                         <label htmlFor="editable">Description: </label>
                         <input type="text" id="description" value={description} onChange={this.handleChange} />
@@ -68,7 +68,9 @@ class Work extends React.Component {
             );
         }
         
+        
+        
     }
 }
 
-export default Work;
+export default SchoolObject;
