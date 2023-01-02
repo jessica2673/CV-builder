@@ -6,9 +6,9 @@ class SchoolObject extends React.Component {
         super(props);
 
         this.state = {
-            name: 'University of School',
-            date: '20XX - Present',
-            study: 'Computer Science',
+            name: 'School',
+            date: '2000 - 2004',
+            study: 'Major',
             description: 'Ad Omnia Paratus',
             editable: 0, //represents view mode and 1 represents edit mode
         }
@@ -29,9 +29,10 @@ class SchoolObject extends React.Component {
 
     handleSubmit = (e) => {
         e.preventDefault();
-        this.setState({editable: 0});
+        this.setState({
+            editable: 0
+        });
         console.log(this.state);
-        return this.state;
     }
 
     render() {   
@@ -67,9 +68,6 @@ class SchoolObject extends React.Component {
                 </div>
             );
         }
-        
-        
-        
     }
 }
 

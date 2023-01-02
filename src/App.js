@@ -10,13 +10,11 @@ class App extends Component {
     super();
     
     this.state = {
-      schoolList: [ <School/> ],
       workList: [ <Work /> ],
       edit: 0 //where 0 represents not in edit mode.
     }
 
     this.changeToEdit = this.changeToEdit.bind(this);
-    this.addSchool = this.addSchool.bind(this);
   };
 
   handleChangeGeneral = (e) => {
@@ -33,25 +31,6 @@ class App extends Component {
       edit: Math.abs(1 - this.state.edit)
     })
   }
-
-  addSchool = (newSchool) => {
-    let currSchools = [...this.state.schoolList];
-    currSchools.push(newSchool);
-    this.setState({
-      schoolList: currSchools
-    });
-  }
-
-  PrintSchool = () => {
-    console.log(this.state.schoolList.name);
-    return (
-      <div>
-        {this.state.schoolList.map((school) => (
-            <div key={uniqid()}>{school}</div>
-         ))}
-       </div>
-     )
-   }
 
    addWork = () => {
     this.setState({
@@ -86,8 +65,7 @@ class App extends Component {
         <h2>About</h2>
         <General/>
         <h2>Education</h2>
-        <this.PrintSchool />   
-        <button onClick={this.addSchool}>Add</button>
+        <School />   
         <h2>Work Experience</h2>
         <this.PrintWork />
         <button onClick={this.addWork}>Add</button>
