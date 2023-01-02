@@ -1,24 +1,19 @@
 import React, { Component } from 'react';
+import data from './data';
 import uniqid from "uniqid";
 
 class SchoolObject extends React.Component {
     constructor(props) {
         super(props);
 
-        this.state = {
-            name: 'School',
-            date: '2000 - 2004',
-            study: 'Major',
-            description: 'Ad Omnia Paratus',
-            editable: 0, //represents view mode and 1 represents edit mode
-        }
+        
 
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
     }
 
     edit = () => {
-        this.setState({editable: 1});
+        this.setState({editable: true});
     }
 
     handleChange = (e) => {
@@ -29,15 +24,25 @@ class SchoolObject extends React.Component {
 
     handleSubmit = (e) => {
         e.preventDefault();
-        this.setState({
-            editable: 0
-        });
-        console.log(this.state);
+        const { name, date, study, description } = this.state;
+        const newSchool = (() => {
+            return { name, date, study, description} })();
+        this.addSchool(newSchool);
+        this.setState({editable: false});
+        console.log(data.education);
+    }
+
+    addSchool = (newSchool) => {
+        // let currSchools = [...data.education];
+        // currSchools.push( newSchool );
+        // data.education = currSchools;
+        // console.log(data.education);
+        data.education.push(newSchool);
     }
 
     render() {   
         const { name, date, study, description } = this.state;
-        if(this.state.editable === 0) {
+        if(!this.state.editable) {
             return (
                 <div>
                     <h3>{name}</h3>
