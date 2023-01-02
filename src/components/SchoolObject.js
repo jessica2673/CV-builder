@@ -6,13 +6,7 @@ class SchoolObject extends React.Component {
     constructor(props) {
         super(props);
 
-        this.state = {
-            name: 'School',
-            date: '2000 - 2004',
-            study: 'Major',
-            description: 'Ad Omnia Paratus',
-            editable: false          
-        }
+        
 
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -23,7 +17,6 @@ class SchoolObject extends React.Component {
     }
 
     handleChange = (e) => {
-        e.preventDefault();
         this.setState ({
             [e.target.id]: e.target.value
         })

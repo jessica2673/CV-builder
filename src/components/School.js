@@ -1,5 +1,4 @@
-import React, { Component } from 'react';
-import SchoolObject from './SchoolObject';
+import React from 'react';
 import data from './data';
 import uniqid from "uniqid";
 
@@ -8,37 +7,66 @@ class School extends React.Component {
         super(props);
 
         this.state = {
-            editable: 0
+            index: 0,
+            name: 'School',
+            date: '2000 - 2004',
+            study: 'Major',
+            description: 'Ad Omnia Paratus',
+            editable: false       
         }
 
         this.removeSchool = this.removeSchool.bind(this);
+        this.addSchool = this.addSchool.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
     }
 
-    edit = () => {
-        this.setState({editable: 1});
+    edit = (e) => {
+        data.education[e.target.id].editable = true;
+        this.setState({
+            index: data.education[e.target.id].index,
+            name: data.education[e.target.id].name,
+            date: data.education[e.target.id].date,
+            study: data.education[e.target.id].study,
+            description: data.education[e.target.id].description,
+            editable: true
+        })
     }
 
     handleChange = (e) => {
-        this.setState ({
+        this.setState({
             [e.target.id]: e.target.value
         })
+        e.preventDefault();
     }
 
     handleSubmit = (e) => {
         e.preventDefault();
-        const { name, date, study, description } = this.state;
-        const newSchool = (() => {
-            return { name, date, study, description } })();
-        this.addSchool(newSchool);
+        const { index, name, date, study, description } = this.state;
+        const editedSchool = (() => { return { index, name, date, study, description, editable: false } })();
+        let tempList = [...data.education];
+        tempList.splice(index, 1, editedSchool);
+        data.education = tempList;
+        this.setState({
+            index: index,
+            name: 'School',
+            date: '2000 - 2004',
+            study: 'Major',
+            description: 'Ad Omnia Paratus',
+            editable: false 
+        });
         console.log(data.education);
+        this.forceUpdate();
     }
 
-    addSchool = (newSchool) => {
-        // let currSchools = [...data.education];
-        // currSchools.push( newSchool );
-        // data.education = currSchools;
-        // console.log(data.education);
-        data.education.push(newSchool);
+    addSchool = (e) => {
+        const { index, name, date, study, description } = this.state;
+        const newSchool = (() => {
+            return { index: this.state.index + 1, name, date, study, description, editable: false } })();
+        let currSchools = [...data.education];
+        currSchools.push( newSchool );
+        data.education = currSchools;
+        this.setState({index: this.state.index + 1})
+        this.forceUpdate();
     }
 
     removeSchool = () => {
@@ -46,38 +74,39 @@ class School extends React.Component {
     }
 
     render() {   
+        const { name, date, study, description } = this.state;
         return (
             <div>
               {data.education.map((school) => {
-                    return (this.state.editable === 0) ? 
-                    <div key={uniqid()}>
+                    return (!school.editable) ? 
+                    <div key={school.index}>
                         <h3>{school.name}</h3>
                         <p>{school.date}</p>
                         <p>{school.study}</p>
                         <p>{school.description}</p>
-                        <button onClick={this.edit}>Edit</button>
-                        <button onClick={this.removeSchool}>Remove</button>
+                        <button id={school.index} onClick={this.edit}>Edit</button>
+                        <button index={school.index} onClick={this.removeSchool}>Remove</button>
                     </div>
                     : 
-                        <div key={uniqid()}>
+                        <div key={school.index}>
                             <form onSubmit={this.handleSubmit}>
                                 <label htmlFor="editable">School name: </label>
-                                <input type="text" id="name" value={school.name} onChange={this.handleChange} />
+                                <input type="text" id="name" value={name} onChange={this.handleChange} />
         
                                 <label htmlFor="editable">Date of Study: </label>
-                                <input type="text" id="date" value={school.date} onChange={this.handleChange} />
+                                <input type="text" id="date" value={date} onChange={this.handleChange} />
         
                                 <label htmlFor="editable">Subject of Study: </label>
-                                <input type="text" id="study" value={school.study} onChange={this.handleChange} />
+                                <input type="text" id="study" value={study} onChange={this.handleChange} />
         
                                 <label htmlFor="editable">Description: </label>
-                                <input type="text" id="description" value={school.description} onChange={this.handleChange} />
+                                <input type="text" id="description" value={description} onChange={this.handleChange} />
         
                                 <input type="submit" value="Save" />
                             </form>
                         </div>
-                    })};
-               <button onClick={this.addSchool}>Add</button>
+                    })}
+               <button onClick={this.addSchool.bind(this)}>Add</button>
             </div>
         )
     }
