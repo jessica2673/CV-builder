@@ -54,12 +54,11 @@ class School extends React.Component {
             description: 'Ad Omnia Paratus',
             editable: false 
         });
-        console.log(data.education);
         this.forceUpdate();
     }
 
-    addSchool = (e) => {
-        const { index, name, date, study, description } = this.state;
+    addSchool = () => {
+        const { name, date, study, description } = this.state;
         const newSchool = (() => {
             return { index: this.state.index + 1, name, date, study, description, editable: false } })();
         let currSchools = [...data.education];
@@ -69,9 +68,35 @@ class School extends React.Component {
         this.forceUpdate();
     }
 
-    removeSchool = () => {
-
+    removeSchool = (e) => {
+        const temp1 = this.copyArrayUnchanged(data.education.slice(0, e.target.id));
+        const temp2 = this.copyArrayChanged(data.education.slice(Number(e.target.id) + 1));
+        console.log(data.education.slice(Number(e.target.id) + 1));
+        data.education = [...temp1, ...temp2];
+        this.setState({
+            index: this.state.index - 1
+        })
+        console.log(data.education);
     }
+
+    copyArrayUnchanged(schools) {
+        let arr = [];
+        schools.map((school) => {
+          arr.push({...school});
+        })
+        return arr;
+      }
+    
+      copyArrayChanged(schools) {
+        console.log("here");
+        let arr = [];
+        schools.map((school) => {
+          school.index = school.index - 1;
+          console.log(school);
+          arr.push({...school});
+        })
+        return arr;
+      }
 
     render() {   
         const { name, date, study, description } = this.state;
@@ -85,7 +110,7 @@ class School extends React.Component {
                         <p>{school.study}</p>
                         <p>{school.description}</p>
                         <button id={school.index} onClick={this.edit}>Edit</button>
-                        <button index={school.index} onClick={this.removeSchool}>Remove</button>
+                        <button id={school.index} onClick={this.removeSchool}>Remove</button>
                     </div>
                     : 
                         <div key={school.index}>
