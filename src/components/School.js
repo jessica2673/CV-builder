@@ -53,6 +53,7 @@ class School extends React.Component {
             description: 'Ad Omnia Paratus',
             editable: false 
         });
+        console.log(data.education);
         this.forceUpdate();
     }
 
@@ -99,17 +100,17 @@ class School extends React.Component {
             <div>
               {data.education.map((school) => {
                     return (!school.editable) ? 
-                    <div key={school.index}>
-                        <h3>{school.name}</h3>
-                        <p>{school.date}</p>
-                        <p>{school.study}</p>
+                    <div key={school.index} className='SchoolItem'>
+                        <p>School name: {school.name}</p>
+                        <p>Years of study: {school.date}</p>
+                        <p>Area of study: {school.study}</p>
                         <p>{school.description}</p>
                         <button id={school.index} onClick={this.edit}>Edit</button>
                         <button id={school.index} onClick={this.removeSchool}>Remove</button>
                     </div>
                     : 
                         <div key={school.index}>
-                            <form onSubmit={this.handleSubmit}>
+                            <form onSubmit={this.handleSubmit} className='SchoolItem'>
                                 <label htmlFor="editable">School name: </label>
                                 <input type="text" id="name" value={name} onChange={this.handleChange} />
         
@@ -122,11 +123,11 @@ class School extends React.Component {
                                 <label htmlFor="editable">Description: </label>
                                 <input type="text" id="description" value={description} onChange={this.handleChange} />
         
-                                <input type="submit" value="Save" />
+                                <input className='submitBtn' type="submit" value="Save" />
                             </form>
                         </div>
                     })}
-               <button onClick={this.addSchool.bind(this)}>Add</button>
+               <button className='addBtn' onClick={this.addSchool.bind(this)}>Add</button>
             </div>
         )
     }

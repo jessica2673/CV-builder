@@ -123,11 +123,11 @@ class Work extends React.Component {
                                 <label htmlFor="editable">Description: </label>
                                 <input type="text" id="description" value={description} onChange={this.handleChange} />
         
-                                <input type="submit" value="Save" />
+                                <input className='submitBtn' type="submit" value="Save" />
                             </form>
                         </div>
                     })}
-               <button onClick={this.addJob.bind(this)}>Add</button>
+               <button className='addBtn' onClick={this.addJob.bind(this)}>Add</button>
            </div>
         )
     }

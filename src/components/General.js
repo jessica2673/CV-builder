@@ -44,9 +44,10 @@ class General extends React.Component {
             return (
                 <div>
                     <h1>{data.general.firstName} {data.general.lastName}</h1>
-                    <p>{data.general.email}</p>
-                    <p>{data.general.phone}</p>
-                    <p>{data.general.website}</p>
+                    <h2>Contact Information</h2>
+                    <p>Email: {data.general.email}</p>
+                    <p>Phone number: {data.general.phone}</p>
+                    <p>Website: {data.general.website}</p>
                     <button onClick={this.edit}>Edit</button>
                 </div>
             );
@@ -54,12 +55,12 @@ class General extends React.Component {
             return (
                 <div>
                     <form onSubmit={this.handleSubmit}>
-                        <label htmlFor="editable">First Name: </label>
-                        <input type="text" id="firstName" value={firstName} onChange={this.handleChange} />
+                        <div className='titleName'>
+                            <input type="text" id="firstName" value={firstName} onChange={this.handleChange} />
+                            <input type="text" id="lastName" value={lastName} onChange={this.handleChange} />
+                        </div>
 
-                        <label htmlFor="editable">Last Name: </label>
-                        <input type="text" id="lastName" value={lastName} onChange={this.handleChange} />
-
+                        <h2>Contact Information</h2>
                         <label htmlFor="editable">Email: </label>
                         <input type="text" id="email" value={email} onChange={this.handleChange} />
 
@@ -68,7 +69,7 @@ class General extends React.Component {
 
                         <label htmlFor="editable">Website: </label>
                         <input type="text" id="website" value={website} onChange={this.handleChange} />
-                        <input type="submit" value="Save" />
+                        <input className='submitBtn' type="submit" value="Save" />
                     </form>
                 </div>
             )
