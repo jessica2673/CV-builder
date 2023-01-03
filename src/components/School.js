@@ -56,7 +56,6 @@ class School extends React.Component {
             description: 'Ad Omnia Paratus',
             editable: false 
         });
-        this.forceUpdate();
     }
 
     addSchool = () => {
@@ -68,7 +67,6 @@ class School extends React.Component {
         data.education = currSchools;
         this.setState({index: this.state.index + 1})
         console.log(data.education);
-        this.forceUpdate();
     }
 
     removeSchool = (e) => {

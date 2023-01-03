@@ -22,7 +22,7 @@ let data = {
         company: 'Company',
         position: 'Web Developer',
         date: '20XX - Present',
-        description: 'Coded lol',
+        description: 'Coded really cool apps!',
         remove: false 
     },],
 

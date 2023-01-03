@@ -6,11 +6,17 @@
     font-size: 1em;
 }
 
+.overall {
+    background-color: rgba(239, 240, 252, 0.669);
+    height: fit-content;
+    min-height: 100vh;
+}
+
 .body {
     display: flex;
+    flex-direction: column;
+    padding-top: 20px;
     padding-bottom: 2em;
-    background-color: rgba(239, 240, 252, 0.669);
-    min-height: 100vh;
     height: fit-content;
     min-width: fit-content;
 }
@@ -18,7 +24,7 @@
 #main {
     z-index: 1;
     margin: auto;
-    margin-top: 4em;
+    margin-top: 1em;
     padding: 2em 1.5em 1em 1.5em;
     background-color: #c7e5ff;
     border-radius: 5px;
@@ -49,6 +55,10 @@ input {
     margin-bottom: 5px;
     background-color: aliceblue;
     font-weight: 600;
+}
+
+input:focus {
+    outline: none
 }
 
 .titleName {
@@ -90,9 +100,26 @@ button:hover {
     line-height: 2.5em;
 }
 
-.SchoolItem {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+.toggleOn, .toggleOff {
+    display: block;
+    min-width: fit-content;
+    max-width: 5em;
+    height: fit-content;
+    margin: auto;
+    background-color: rgb(102, 102, 102);
+    color: aliceblue;
+    padding: 5px;
+    text-align: center;
+    font-size: 1.5em;
+}
+
+.toggleOn {
+    display: none;
+}
+
+.message {
+    margin: auto;
+    padding-top: 10px;
 }
 
 .addBtn {
@@ -101,7 +128,7 @@ button:hover {
     color: aliceblue;
 }
 
-.addBtn:hover,.submitBtn:hover {
+.addBtn:hover,.submitBtn:hover, .toggleOn:hover, .toggleOff:hover {
     background-color: rgb(62, 62, 62);
 }
 
@@ -110,3 +137,6 @@ button:hover {
     color: aliceblue;
 }
 
+.SchoolItem, .WorkItem {
+    margin-bottom: 1em;
+}

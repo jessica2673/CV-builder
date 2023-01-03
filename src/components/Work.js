@@ -10,7 +10,7 @@ class Work extends React.Component {
             company: 'Company',
             position: 'Web Developer',
             date: '20XX - Present',
-            description: 'Coded lol',
+            description: 'Coded really cool apps!',
             editable: false,
             tempIndex: 0
         }
@@ -56,7 +56,6 @@ class Work extends React.Component {
             description: 'Coded lol',
             editable: false
         });
-        this.forceUpdate();
     }
 
     addJob = () => {
@@ -67,7 +66,6 @@ class Work extends React.Component {
         currWorkList.push( newWork );
         data.work = currWorkList;
         this.setState({index: this.state.index + 1})
-        this.forceUpdate();
     }
 
     removeJob = (e) => {
@@ -103,7 +101,7 @@ class Work extends React.Component {
             <div>
               {data.work.map((job) => {
                     return (!job.editable) ? 
-                    <div key={job.index}>
+                    <div key={job.index} className='WorkItem'>
                         <h3>{job.company}</h3>
                         <p>{job.position}</p>
                         <p>{job.date}</p>
@@ -113,7 +111,7 @@ class Work extends React.Component {
                     </div>
                     : 
                         <div key={job.index}>
-                            <form onSubmit={this.handleSubmit}>
+                            <form onSubmit={this.handleSubmit} className='WorkItem'>
                                 <label htmlFor="editable">Company: </label>
                                 <input type="text" id="company" value={company} onChange={this.handleChange} />
         
