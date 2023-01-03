@@ -15,7 +15,7 @@ class App extends React.Component {
     
     openForms.forEach((form) => {
       if(cont && form.addEventListener) {
-        document.querySelector('.message').textContent = "Submit form first.";
+        document.querySelector('.message').textContent = "Submit edits first.";
         cont = false;
       }
     })
