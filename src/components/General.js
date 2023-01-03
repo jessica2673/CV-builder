@@ -1,4 +1,5 @@
-import React, { Component } from 'react';
+import React from 'react';
+import data from './data';
 
 class General extends React.Component {
     constructor(props) {
@@ -10,13 +11,16 @@ class General extends React.Component {
             email: 'abc@email.com',
             phone: '1112223333',
             website: 'helloworld.com',
-            editable: 0 //represents view mode and 1 represents edit mode
+            editable: false
         }
         this.handleChange = this.handleChange.bind(this);
+        this.edit = this.edit.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
     }
 
     edit = () => {
-        this.setState({editable: 1});
+        data.general.editable = true;
+        this.setState({ editable: true});
     }
 
     handleChange = (e) => {
@@ -27,19 +31,22 @@ class General extends React.Component {
 
     handleSubmit = (e) => {
         e.preventDefault();
-        this.setState({editable: 0});
+        data.general.editable = false;
+        const { firstName, lastName, email, phone, website } = this.state;
+        const editedGeneral = (() => {return { firstName, lastName, email, phone, website, editable: false }})();
+        data.general = editedGeneral;
+        this.setState({ editable: false });
     }
 
     render() {
         const { firstName, lastName, email, phone, website } = this.state;
-
-        if(this.state.editable === 0) {
+        if(!data.general.editable) {
             return (
                 <div>
-                    <h1>{firstName} {lastName}</h1>
-                    <p>{email}</p>
-                    <p>{phone}</p>
-                    <p>{website}</p>
+                    <h1>{data.general.firstName} {data.general.lastName}</h1>
+                    <p>{data.general.email}</p>
+                    <p>{data.general.phone}</p>
+                    <p>{data.general.website}</p>
                     <button onClick={this.edit}>Edit</button>
                 </div>
             );

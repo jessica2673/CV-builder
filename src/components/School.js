@@ -1,6 +1,5 @@
 import React from 'react';
 import data from './data';
-import uniqid from "uniqid";
 
 class School extends React.Component {
     constructor(props) {
@@ -70,13 +69,11 @@ class School extends React.Component {
 
     removeSchool = (e) => {
         const temp1 = this.copyArrayUnchanged(data.education.slice(0, e.target.id));
-        const temp2 = this.copyArrayChanged(data.education.slice(Number(e.target.id) + 1));
-        console.log(data.education.slice(Number(e.target.id) + 1));
+        const temp2 = this.copyArrayChanged(data.education.slice(Number(e.target.id) + 1));        
         data.education = [...temp1, ...temp2];
         this.setState({
             index: this.state.index - 1
         })
-        console.log(data.education);
     }
 
     copyArrayUnchanged(schools) {
@@ -88,11 +85,9 @@ class School extends React.Component {
       }
     
       copyArrayChanged(schools) {
-        console.log("here");
         let arr = [];
         schools.map((school) => {
           school.index = school.index - 1;
-          console.log(school);
           arr.push({...school});
         })
         return arr;
