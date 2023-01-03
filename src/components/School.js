@@ -11,7 +11,8 @@ class School extends React.Component {
             date: '2000 - 2004',
             study: 'Major',
             description: 'Ad Omnia Paratus',
-            editable: false       
+            editable: false, 
+            tempIndex: 0
         }
 
         this.removeSchool = this.removeSchool.bind(this);
@@ -22,12 +23,13 @@ class School extends React.Component {
     edit = (e) => {
         data.education[e.target.id].editable = true;
         this.setState({
-            index: data.education[e.target.id].index,
+            index: this.state.index,
             name: data.education[e.target.id].name,
             date: data.education[e.target.id].date,
             study: data.education[e.target.id].study,
             description: data.education[e.target.id].description,
-            editable: true
+            editable: true,
+            tempIndex: data.education[e.target.id].index,
         })
     }
 
@@ -40,20 +42,20 @@ class School extends React.Component {
 
     handleSubmit = (e) => {
         e.preventDefault();
-        const { index, name, date, study, description } = this.state;
+        const index = this.state.tempIndex;
+        const { name, date, study, description } = this.state;
         const editedSchool = (() => { return { index, name, date, study, description, editable: false } })();
         let tempList = [...data.education];
         tempList.splice(index, 1, editedSchool);
         data.education = tempList;
         this.setState({
-            index: index,
+            index: this.state.index,
             name: 'School',
             date: '2000 - 2004',
             study: 'Major',
             description: 'Ad Omnia Paratus',
             editable: false 
         });
-        console.log(data.education);
         this.forceUpdate();
     }
 
@@ -65,6 +67,7 @@ class School extends React.Component {
         currSchools.push( newSchool );
         data.education = currSchools;
         this.setState({index: this.state.index + 1})
+        console.log(data.education);
         this.forceUpdate();
     }
 

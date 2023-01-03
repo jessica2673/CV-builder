@@ -11,7 +11,8 @@ class Work extends React.Component {
             position: 'Web Developer',
             date: '20XX - Present',
             description: 'Coded lol',
-            editable: false
+            editable: false,
+            tempIndex: 0
         }
 
         this.removeJob = this.removeJob.bind(this);
@@ -22,12 +23,13 @@ class Work extends React.Component {
     edit = (e) => {
         data.work[e.target.id].editable = true;
         this.setState({
-            index: data.work[e.target.id].index,
+            index: this.state.index,
             company: data.work[e.target.id].company,
             position: data.work[e.target.id].position,
             date: data.work[e.target.id].date,
             description: data.work[e.target.id].description,
-            editable: true
+            editable: true,
+            tempIndex: data.work[e.target.id].index
         })
     }
 
@@ -40,13 +42,14 @@ class Work extends React.Component {
 
     handleSubmit = (e) => {
         e.preventDefault();
-        const { index, company, position, date, description } = this.state;
+        const index = this.state.tempIndex;
+        const { company, position, date, description } = this.state;
         const editedWork = (() => { return { index, company, position, date, description, editable: false } })();
         let tempList = [...data.work];
         tempList.splice(index, 1, editedWork);
         data.work = tempList;
         this.setState({
-            index: index,
+            index: this.state.index,
             company: 'Company',
             position: 'Web Developer',
             date: '20XX - Present',
